@@ -2,30 +2,15 @@ pipeline {
     agent any
 
     environment {
-        NODE_HOME = '/usr/local/bin' // Path to Node.js
-        PATH = "$NODE_HOME:$PATH"
+        NODEJS_HOME = tool name: 'nodejs' // Ensure you have a Node.js tool configured in Jenkins
+        PATH = "${env.NODEJS_HOME}/bin:${env.PATH}"
     }
 
     stages {
-        stage('Install Node.js') {
-            steps {
-                // Install Node.js if not already installed
-                sh '''
-                if ! command -v node &> /dev/null
-                then
-                    curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
-                    sudo apt-get install -y nodejs
-                fi
-                node -v
-                npm -v
-                '''
-            }
-        }
-
         stage('Checkout') {
             steps {
                 // Clone the repository
-                git 'https://github.com/WaailRajpoot/crud-app.git'
+                git 'https://github.com/your-repo/crud-app.git'
             }
         }
 
@@ -36,30 +21,32 @@ pipeline {
             }
         }
 
-        stage('Run Tests') {
+        stage('Test') {
             steps {
-                // Run tests
+                // Run tests (if any)
                 sh 'npm test'
             }
         }
 
-        stage('Start Application') {
+        stage('Build') {
+            steps {
+                // Build the application (if needed)
+                sh 'npm run build'
+            }
+        }
+
+        stage('Deploy') {
             steps {
                 // Start the application
                 sh 'npm start &'
-                // Wait a bit for the app to start
-                sleep 5
-                // Debug: Check if the application is running
-                sh 'curl -I localhost:3000 || true'
             }
         }
     }
 
     post {
         always {
-            // Clean up workspace after the pipeline run
-            cleanWs()
+            // Cleanup
+            sh 'fuser -k 3000/tcp' // Ensure the port is free before running the app again
         }
     }
 }
-
