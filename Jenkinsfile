@@ -7,6 +7,21 @@ pipeline {
     }
 
     stages {
+        stage('Install Node.js') {
+            steps {
+                // Install Node.js if not already installed
+                sh '''
+                if ! command -v node &> /dev/null
+                then
+                    curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
+                    sudo apt-get install -y nodejs
+                fi
+                node -v
+                npm -v
+                '''
+            }
+        }
+
         stage('Checkout') {
             steps {
                 // Clone the repository
@@ -31,7 +46,11 @@ pipeline {
         stage('Start Application') {
             steps {
                 // Start the application
-                sh 'npm start'
+                sh 'npm start &'
+                // Wait a bit for the app to start
+                sleep 5
+                // Debug: Check if the application is running
+                sh 'curl -I localhost:3000 || true'
             }
         }
     }
@@ -43,3 +62,4 @@ pipeline {
         }
     }
 }
+
