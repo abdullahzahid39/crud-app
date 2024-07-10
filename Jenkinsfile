@@ -10,7 +10,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 // Clone the repository
-                git 'https://github.com/WaailRajpoot/crud-app.git'
+                git 'https://github.com/your-repo/crud-app.git'
             }
         }
 
@@ -45,8 +45,13 @@ pipeline {
 
     post {
         always {
-            // Cleanup
-            sh 'fuser -k 3000/tcp' // Ensure the port is free before running the app again
+            script {
+                // Wrap the cleanup in a node block
+                node {
+                    // Ensure the port is free before running the app again
+                    sh 'fuser -k 3000/tcp'
+                }
+            }
         }
     }
 }
