@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        NODEJS_HOME = tool name: 'nodejs' // Ensure you have a Node.js tool configured in Jenkins
+        NODEJS_HOME = tool name: 'NodeJS 14' // Ensure you have a Node.js tool configured in Jenkins
         PATH = "${env.NODEJS_HOME}/bin:${env.PATH}"
     }
 
@@ -48,8 +48,8 @@ pipeline {
             script {
                 // Wrap the cleanup in a node block
                 node {
-                    // Ensure the port is free before running the app again
-                    sh 'fuser -k 3000/tcp'
+                    // Ensure the port is free before running the app again using lsof
+                    sh 'lsof -t -i tcp:3000 | xargs kill -9 || true'
                 }
             }
         }
