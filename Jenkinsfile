@@ -39,7 +39,7 @@ pipeline {
             steps {
                 // Start the application using pm2
                 sh 'nohup npm start &'// Install pm2 globally if not already installed
-                echo"this file is correct"
+                
                 
             }
         }
