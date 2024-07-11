@@ -39,6 +39,7 @@ pipeline {
             steps {
                 // Start the application
                  sh 'nohup npm start '
+                echo"hello"
      
 
     
