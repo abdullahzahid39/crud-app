@@ -37,18 +37,10 @@ pipeline {
 
         stage('Deploy') {
             steps {
-                script {
-                    // Install pm2 globally if not already installed
-                    sh 'npm install -g pm2'
-
-                    // Stop any existing instance of the application managed by pm2
-                    sh 'pm2 stop my-app || true' // Don't fail if the process does not exist
-
-                    // Start the application using pm2
-                    sh 'pm2 start app.js --name "my-app"'
-
-                    // Save the pm2 process list and corresponding environments
-                    sh 'pm2 save'
+                  // Start the application using pm2
+                sh 'nohup npm start &'// Install pm2 globally if not already installed
+                
+                    
                 }
             }
         }
