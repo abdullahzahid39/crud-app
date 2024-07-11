@@ -35,14 +35,13 @@ pipeline {
             }
         }
 
-        stage('Deploy') {
+    
             steps {
                 // Start the application
-                 sh 'nohup npm start &'
-                echo"hello"
+            steps {
+        sh 'npm install -g pm2' // Install pm2 globally if not already installed
+        sh 'pm2 start npm -- start'   
      
-
-    
                 
             }
         }
