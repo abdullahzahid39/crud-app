@@ -37,11 +37,8 @@ pipeline {
 
         stage('Deploy') {
             steps {
-                  // Start the application using pm2
-                sh 'nohup npm start &'// Install pm2 globally if not already installed
-                
-                    
-                }
+                // Start the application using pm2
+                sh 'nohup npm start &' // Ensure this command starts your application correctly
             }
         }
     }
