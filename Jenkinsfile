@@ -40,9 +40,9 @@ pipeline {
                 // Start the application
             steps {
         sh 'npm install -g pm2' // Install pm2 globally if not already installed
-        sh 'pm2 start npm -- start'   
+        sh 'pm2 start npm -- start'
      
-                
+            }  
             }
         }
     }
