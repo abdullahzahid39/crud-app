@@ -38,7 +38,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 // Start the application using pm2
-                sh ' npm start &' // Ensure this command starts your application correctly
+                sh 'nohup npm start &' // Ensure this command starts your application correctly
                 
             }
         }
