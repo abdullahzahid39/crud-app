@@ -35,14 +35,11 @@ pipeline {
             }
         }
 
-    
+        stage('Deploy') {
             steps {
-                // Start the application
-            steps {
-        sh 'npm install -g pm2' // Install pm2 globally if not already installed
-        sh 'pm2 start npm -- start'
-     
-            }  
+                // Start the application using pm2
+                sh 'npm install -g pm2' // Install pm2 globally if not already installed
+                sh 'pm2 start npm -- start'
             }
         }
     }
