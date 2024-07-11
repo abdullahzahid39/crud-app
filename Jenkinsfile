@@ -38,7 +38,6 @@ pipeline {
         stage('Deploy') {
             steps {
                 // Start the application
-                 sh 'cp -r . /test2'
                  sh 'nohup npm start &'
             }
         }
