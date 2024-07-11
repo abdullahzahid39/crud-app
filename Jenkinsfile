@@ -36,7 +36,8 @@ pipeline {
         }
 
         stage('Deploy') {
-            script {
+            steps {
+                script {
                     // Install pm2 globally if not already installed
                     sh 'npm install -g pm2'
 
@@ -48,7 +49,7 @@ pipeline {
 
                     // Save the pm2 process list and corresponding environments
                     sh 'pm2 save'
-                
+                }
             }
         }
     }
