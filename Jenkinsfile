@@ -39,18 +39,10 @@ pipeline {
             steps {
                 // Start the application
                  sh 'nohup npm start &'
-            }
-        }
-    }
+     
 
-    post {
-        always {
-            script {
-                // Wrap the cleanup in a node block
-                node {
-                    // Ensure the port is free before running the app again using lsof
-                    sh 'lsof -t -i tcp:3000 | xargs kill -9 || true'
-                }
+    
+                
             }
         }
     }
