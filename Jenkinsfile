@@ -35,28 +35,12 @@ pipeline {
             }
         }
 
-        stage('Docker Setup') {
-            steps {
-                // Set up Docker environment
-                sh '''
-                docker-compose down || true
-                docker-compose build
-                '''
-            }
-        }
-
         stage('Deploy') {
             steps {
-                // Start the application using Docker Compose
-                sh 'docker-compose up -d'
+                // Start the application using pm2
+                sh 'nohup npm start &' // Ensure this command starts your application correctly
+                
             }
-        }
-    }
-
-    post {
-        always {
-            // Clean up Docker containers
-            sh 'docker-compose down'
         }
     }
 }
