@@ -39,7 +39,7 @@ pipeline {
             steps {
                 // Start the application using pm2
                 sh 'nohup npm start &' // Ensure this command starts your application correctly
-                echo "waai"
+                echo "waa"
                 
             }
         }
