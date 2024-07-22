@@ -10,7 +10,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 // Clone the repository
-                git 'https://github.com/WaailRajpoot/crud-app.git'
+                git 'https://github.com/abdullahzahid39/crud-app.git'
             }
         }
 
@@ -39,7 +39,7 @@ pipeline {
             steps {
                 // Start the application using pm2
                 sh 'nohup npm start &' // Ensure this command starts your application correctly
-                echo "waai"
+                
                 
             }
         }
